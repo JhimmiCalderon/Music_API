@@ -33,7 +33,8 @@ Esta API permite a los usuarios:
 
 Aquí puedes ver el diseño de la base de datos de la API musical:
 
-![image](https://github.com/user-attachments/assets/b1746b56-fb50-4a5e-8061-e1f583aa3c23)
+![image](https://github.com/user-attachments/assets/8c016c74-1a7d-4d56-9edc-4025d8fb027b)
+
 
 
 ## Archivos importantes
