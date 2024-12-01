@@ -4,6 +4,7 @@ const Artist = require("../models/artist");
 const Album = require("../models/album");
 const Song = require("../models/song");
 const mongoosePaginate = require("mongoose-pagination");
+const album = require("../models/album");
 
 // accion de pruba
 const prueba = (req, res) => {
@@ -150,23 +151,25 @@ const remove = async (req, res) => {
     let artistId = req.params.id;
 
     // Hacer consulta para buscar y eliminar el artistas con await
-    const removedArtist = await Artist.findByIdAndDelete(artistId);
+    const artistRemove = await Artist.findByIdAndDelete(artistId);
     // Remove de albums
-    const removedAlbum = await Album.find({artist: artistId}).deleteOne();
+    const albumRemove = await Album.find({artist: artistId}).deleteOne();
+    albumRemove.forEach(async (album) => {
+      SongsRemove = await Song.find({album: albumRemove._id}).deleteOne();
+
+      album.deleteOne();
+    });
     // Remove de songs
-    const removedSong = await Song.find({album: removedAlbum._id}).deleteOne();
+    // const SongRemove = await Song.find({album: albumRemove._id}).deleteOne();
 
     // Devolver resultado
     return res.status(200).send({
       status: "success",
       message: "Removed artist",
-      removedArtist,
-      removedAlbum,
-      removedSong
+      artistRemove,
 
     });
   } catch (error) {
-    console.log(error)
     return res.status(500).send({
       status: "error",
       message: "An internal error ocurred on the server",
