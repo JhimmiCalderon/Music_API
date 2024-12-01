@@ -8,7 +8,7 @@ const ArtistSchema = Schema ({
     description: String,
     image: {
         type: String,
-        default: "defaul.png"
+        default: "default.png",
     },
     created_at:{
         type: Date,

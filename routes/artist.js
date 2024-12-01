@@ -13,8 +13,8 @@ const Artistcontroller = require("../controllers/artist");
 // Configuracion de subida
 const multer = require("multer");
 
-const storange = multer.diskStorage({
-    destination: (req, file, cd) => {
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
         cb(null, "./uploads/artists")
     },
     filename: (req, file, cb) => {
@@ -31,7 +31,7 @@ router.post("/listArtist/:page?", check.auth, Artistcontroller.listArtist);
 router.put("/update/:id", check.auth, Artistcontroller.update);
 router.delete("/remove/:id", check.auth, Artistcontroller.remove);
 router.post("/upload/:id",[check.auth, uploads.single("file0")], Artistcontroller.upload);
-router.post("/artistFile/:file", check.auth, Artistcontroller.artistFile );
+router.get("/artistFile/:file", check.auth, Artistcontroller.artistFile );
 
 // Exportar router
 module.exports = router;
